@@ -77,7 +77,7 @@ cd frontend
 npm start
 ```
 ### **Access the App**  
-🔗 Open [http://localhost:3000](http://localhost:3000)  
+🔗 Open [http://localhost:3000](http://localhost:3000) ](https://robin-coupon-distributor-8jzq.vercel.app/) 
 
 ---
 
