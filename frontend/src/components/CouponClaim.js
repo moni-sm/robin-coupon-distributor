@@ -14,6 +14,8 @@ const CouponClaim = () => {
 
     try {
       console.log("Attempting to claim coupon...");
+      console.log("API Base URL:", import.meta.env.VITE_API_BASE_URL);
+
       
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/coupons/claim`, {
         withCredentials: true,
