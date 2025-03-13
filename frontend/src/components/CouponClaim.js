@@ -10,7 +10,7 @@ const CouponClaim = () => {
   const claimCoupon = async () => {
     setIsLoading(true); // Start loading
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL || "https://robin-coupon-distributor-3.onrender.com"}/api/coupons/claim`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL || "http://localhost:5000"}/api/coupons/claim`, {
         withCredentials: true,
       });
       setMessage(response.data.message);
