@@ -1,0 +1,31 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import '../styles/App.css';
+
+const CouponClaim = () => {
+  const [message, setMessage] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const claimCoupon = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/coupons/claim', { withCredentials: true });
+      setMessage(response.data.message);
+      setIsError(false);
+    } catch (error) {
+      setMessage(error.response?.data?.message || 'An error occurred!.');
+      setIsError(true);
+    }
+  };
+
+  return (
+    <div className="coupon-container">
+      <h1>Coupon Distribution</h1>
+      <button className="claim-button" onClick={claimCoupon}>
+        Claim Coupon
+      </button>
+      <p className={`message ${isError ? 'error' : ''}`}>{message}</p>
+    </div>
+  );
+};
+
+export default CouponClaim;
