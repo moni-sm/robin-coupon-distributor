@@ -10,10 +10,20 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ 
-  origin: ['https://robin-coupon-distributor-1009.vercel.app/','*'],
-  credentials: true, 
-}));
+
+const allowedOrigins = [
+  "https://robin-coupon-distributor-8jzq.vercel.app", // ✅ Your Vercel frontend URL
+  "http://localhost:3000", // ✅ Local development
+];
+
+// Enable CORS
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // ✅ Allows cookies/session storage if needed
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://monikasm2019:Monika2001@cluster0.nux2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
