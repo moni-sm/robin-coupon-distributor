@@ -9,51 +9,33 @@ const CouponClaim = () => {
 
   const claimCoupon = async () => {
     setIsLoading(true);
-    setMessage(''); // Clear previous messages
-    setIsError(false);
-
     try {
-      console.log("Attempting to claim coupon...");
-      console.log("API Base URL:", import.meta.env.VITE_API_BASE_URL);
-
-      
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/coupons/claim`, {
+      console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL); // Log the API base URL
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/coupons/claim`, {
         withCredentials: true,
       });
-
-      console.log("API Response:", response.data); // ✅ Log successful response
-
-      if (response.status === 200) {
-        setMessage(response.data.message || "Coupon claimed successfully!");
-      } else {
-        setMessage("Unexpected response from the server.");
-        setIsError(true);
-      }
+      setMessage(response.data.message);
+      setIsError(false);
     } catch (error) {
-      console.error("API Error:", error.response?.data || error.message); // ✅ Log error
-
-      if (error.response) {
-        setMessage(error.response.data?.message || "Failed to claim coupon.");
-      } else if (error.request) {
-        setMessage("No response from server. Please try again later.");
-      } else {
-        setMessage("An unexpected error occurred!");
-      }
-      
+      console.error('Error claiming coupon:', error); // Log the full error object
+      setMessage(error.response?.data?.message || 'An error occurred!');
       setIsError(true);
     } finally {
       setIsLoading(false);
-
     }
   };
 
   return (
     <div className="coupon-container">
       <h1>Coupon Distribution</h1>
-      <button className="claim-button" onClick={claimCoupon} disabled={isLoading}>
+      <button
+        className="claim-button"
+        onClick={claimCoupon}
+        disabled={isLoading}
+      >
         {isLoading ? 'Claiming...' : 'Claim Coupon'}
       </button>
-      {message && <p className={`message ${isError ? 'error' : 'success'}`}>{message}</p>}
+      <p className={`message ${isError ? 'error' : ''}`}>{message}</p>
     </div>
   );
 };
