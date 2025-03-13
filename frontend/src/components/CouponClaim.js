@@ -5,12 +5,12 @@ import '../styles/App.css';
 const CouponClaim = () => {
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const claimCoupon = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
-      const response = await axios.get(`${'http://localhost:5000'}/api/coupons/claim`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/coupons/claim`, {
         withCredentials: true,
       });
       setMessage(response.data.message);
@@ -19,18 +19,14 @@ const CouponClaim = () => {
       setMessage(error.response?.data?.message || 'An error occurred!');
       setIsError(true);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="coupon-container">
       <h1>Coupon Distribution</h1>
-      <button
-        className="claim-button"
-        onClick={claimCoupon}
-        disabled={isLoading} // Disable button while loading
-      >
+      <button className="claim-button" onClick={claimCoupon} disabled={isLoading}>
         {isLoading ? 'Claiming...' : 'Claim Coupon'}
       </button>
       <p className={`message ${isError ? 'error' : ''}`}>{message}</p>
