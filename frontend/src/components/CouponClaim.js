@@ -43,6 +43,7 @@ const CouponClaim = () => {
       setIsError(true);
     } finally {
       setIsLoading(false);
+
     }
   };
 
