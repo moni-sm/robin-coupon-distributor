@@ -17,7 +17,14 @@ const sampleCoupons = [
   { couponCode: 'COUPON2' },
   { couponCode: 'COUPON3' },
   { couponCode: 'COUPON4' },
-  { couponCode: 'COUPON5' }
+  { couponCode: 'COUPON5' },
+  { couponCode: 'COUPON6' },
+  { couponCode: 'COUPON7' },
+  { couponCode: 'COUPON8' },
+  { couponCode: 'COUPON9' },
+  { couponCode: 'COUPON10' },
+  { couponCode: 'COUPON11' },
+
 ];
 
 // Insert sample coupons into the database
@@ -34,3 +41,4 @@ const seedCoupons = async () => {
 };
 
 // Run the seeding function
+seedCoupons();
